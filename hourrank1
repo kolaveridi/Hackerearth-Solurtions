@@ -1,0 +1,38 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+typedef long long  ll;
+const ll MOD=1000000007;
+ll fast_exp(ll base, ll exp) {
+    ll res=1;
+    while(exp>0) {
+       if(exp%2==1) res=(res*base)%MOD;
+       base=(base*base)%MOD;
+       exp/=2;
+    }
+    return res%MOD;
+}
+
+int main() {
+  ll n;
+    scanf("%lld",&n);
+    ll xorval;
+    ll x;
+    scanf("%lld",&x);
+    xorval=x;
+    for(int i=1;i<=n-1;i++){
+    	ll val;
+      scanf("%lld",&val);
+    	xorval=xorval^val;
+	}
+   ll ans=fast_exp(2LL,n-1)-1;
+    if(xorval==0) 
+    printf("%lld\n",ans%MOD);
+    else
+        cout<<0<<endl;
+    return 0;
+}
+
