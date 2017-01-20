@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+typedef long long ll;
+
+
+ll modpowIter(ll a, ll b) {
+        ll ans=1LL;
+        while(b != 0) {
+                if(b%2 == 1)
+                        ans=(ans*a)%MOD;
+
+                a=(a*a)%MOD;
+                b /= 2;
+        }
+        return ans;
+}
+int main()
+{
+    string s;
+    cin>>s;
+    int len=s.length()-1;//3 for abcd
+    //ll len=l;
+    ll sum=0;
+    for(int i=0;i<=len;i++){
+            ll val=s[i]-'0';
+   // cout<<" val is "<<val<<endl;
+    ll p=modpowIter(2LL,(long long)i);
+   // cout<<" p is "<<p<<endl;//
+    ll z=len-i;//2-0
+   // cout<<"Z IS "<<z<<endl;
+    ll q=modpowIter(11LL,z);
+   // cout<<" q is "<<q<<endl;
+    ll r=val*(p*q)%MOD;
+    sum=(sum+r)%MOD;
+    }
+    printf("%lld\n",sum);
+
+    return 0;
+}
