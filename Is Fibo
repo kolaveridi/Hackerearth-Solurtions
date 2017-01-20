@@ -1,0 +1,21 @@
+import java.util.Scanner;
+import java.util.*;
+public class Isfibo {
+       public static double n;
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int t=in.nextInt();
+		while(t-->0){
+		n=in.nextDouble();
+		double x=(5*(n*n)+4);
+		double y=(5*(n*n)-4);
+		if (Math.sqrt(x)%1==0 || Math.sqrt(y)%1==0)
+		System.out.println("IsFibo");
+		else
+			System.out.println("IsNotFibo");
+		
+
+	}
+
+}
+}
