@@ -1,0 +1,21 @@
+import java.io.*;
+import java.util.Scanner;
+import java.lang.*;
+public class Stringuse {
+// only sTACKOVERFLOW
+	private static Scanner in;
+
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+         String s=in.next();
+		StringBuilder sb=new StringBuilder(s);
+	   boolean ans= sb.reverse().toString().equals(s);
+	    if(ans==true)
+	    System.out.println("Yes");
+	    else
+	    	 System.out.println("No");
+	    	
+
+	}
+
+}
