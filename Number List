@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std ;
+typedef long long ll;
+int a[200005];
+//vector <ll> v(200005);
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,k;
+        scanf("%d %d",&n,&k);
+        for(int i=1;i<=n;i++){
+                int x;
+            scanf("%d",&x);
+        a[i]=x;
+        }
+        int i=1;
+        ll val=0;
+    while(i<=n){
+        if(a[i]>k){
+            i++;
+            continue;
+        }
+        int co=0;
+        while(i<=n && a[i]<=k){
+            i++;
+            co++;
+        }
+
+        val+=((1LL*co*(co+1))/2);
+       // cout<<" val "<<val<<endl;
+
+    }
+    //cout<<" val "<<val<<endl;
+        ll total=((1LL*n*(n+1))/2);
+
+        cout<<total-val<<endl;
+    }
+
+
+    return 0;
+}
