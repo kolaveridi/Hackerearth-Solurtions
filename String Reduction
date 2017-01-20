@@ -1,0 +1,98 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <cstdlib>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+/* Head ends here */
+
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+
+char str[105];
+const int infinite=1000000;
+int check [105][105][3];
+int possibleval[105][105][3];// either 0 0r 1 will be filed
+ //dp(ch,i) is the smallest length of string over prefix till index =i we obtain if the final string contains only character  ch
+ int val=0;
+ int  dp[3][105];
+  // possible to reduce string str[st]......str[end] into character c
+  bool possible(int st,int en,char c){
+      if(st==en){// if starting and end index are same
+        if(str[st]==c)
+            return true;
+        else
+            return false;
+      }
+      if(check[st][en][c]==val)// memoization ,if it is already processed earlier simply return
+        return possibleval[st][en][c];
+
+        check[st][en][c]=val;
+        //segment <st...k> must be 1/0 and segment <k+1.....en>must be 0/1 if merging two segments has to be  (c== 2)
+        // similarly for other cases
+        // here u and v are the must be answers for the two segments so that they combine to form c
+        int u,v,k;
+        if(c==0) u=1,v=2;
+        if(c==2) u=1,v=0;
+        if(c==1) u=0,v=2;
+        // we got the must be values for u and v here
+        for(int k=st;k<en;k++){
+            if((possible(st,k,u)&&possible(k+1,en,v) )||(possible(st,k,v)&&possible(k+1,en,u) ))
+               return possibleval[st][en][c]=true;
+
+        }
+        return  possibleval[st][en][c]=false;
+
+
+
+  }
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+            int check [105][105][3]={0};
+int possibleval[105][105][3]={0};
+dp[3][105]={0};
+            val++;
+    scanf("%s",str+1);// stores string from str[1] position
+    /*for(int i=0;i<10;i++){
+   cout<<"i is "<<i<<" "<<str[i]<<endl;*/
+   int len=strlen(str+1);
+   // we convert a ,b,c to 0 ,1 ,2 so we treat 0 1 2 as chracters now
+   for(int i=1;i<=len;i++)
+    str[i]=str[i]-'a';
+
+    for(int fin=0;fin<=2;fin++)// if final answer contains a,b,c or say 0,1,2
+    {
+        // i index of prefix
+        for(int i=1;i<=len;i++){
+            dp[fin][i]=infinite;
+            for(int j=1;j<=i;j++){
+                if(possible(j,i,fin))
+                    dp[fin][i]=min(dp[fin][i],dp[fin][j-1]+1);
+
+            }
+        }
+    }
+
+cout<<min(dp[0][len],min(dp[1][len],dp[2][len]))<<endl;;
+
+    }
+
+    return 0;
+}
