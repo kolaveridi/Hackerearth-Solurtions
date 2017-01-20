@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+stack<pair<int,int> > elements,maxim;
+int main()
+{
+    int n;
+    cin>>n;
+    int id=1;// index as 1
+    while(n--){
+        pair<int, int> p1, p2;
+        int x;
+        cin>>x;
+        if(x==1){
+           int no;cin>>no;
+            elements.push(make_pair(no,id));//push all elements into element stack
+            if(maxim.size()==0){// if it is first element push it in maxim stack as well
+              maxim.push(make_pair(no,id))  ;
+            }
+           else{
+            p1=maxim.top();// compare the top element of the maximum stack to the number being input
+            if(p1.first<no){
+                maxim.push(make_pair(no,id));
+            }
+           }
+        }
+        else if(x==2){
+        p1=maxim.top();
+        p2=elements.top();
+
+        if(p1.first==p2.first && p1.second==p2.second)
+        {
+            maxim.pop();
+        }
+        elements.pop();// remove the element from element stack
+        }
+        else{
+            p1=maxim.top();
+            cout<<p1.first<<endl;
+        }
+
+        id++;
+    }
+
+    return 0;
+}
