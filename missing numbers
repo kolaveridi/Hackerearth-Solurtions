@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+//int a[1000015];
+int fa[10005];
+int fb[10005];
+//int b[1000015];
+int main()
+{
+    int n,m;
+    cin>>n;
+   // cout<<" n and m are "<<n<<m;
+    for(int i=1;i<=n;i++){
+            int x;
+        cin>>x;
+        fa[x]++;
+    }
+    cin>>m;
+    for(int i=1;i<=m;i++){
+        int y;
+        cin>>y;
+        fb[y]++;
+    }
+    for(int i=1;i<=10000;i++){
+        if(fb[i]>fa[i])
+            cout<<i<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
