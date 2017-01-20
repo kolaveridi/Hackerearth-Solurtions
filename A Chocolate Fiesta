@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long  ll;
+ll big=1000000007;
+ll a[100005];
+ll power(ll x,ll  y){
+ll temp;
+if(y==0)
+    return 1;// anything to power 0 is 1
+temp=power(x,y/2);
+if(y%2==0)
+    return (temp*temp)%big;
+else
+    return (x*temp*temp)%big;
+ 
+}
+int main()
+{
+  ll n;
+  scanf("%lld",&n) ;
+  ll n_odd=0;ll n_even=0;
+  for(int i=1;i<=n;i++){
+    scanf("%d",&a[i]);
+    if(a[i]%2==0)
+        n_even++;
+    else
+        n_odd++;
+  }
+  if(n_odd==0)
+  {
+      ll ans=power(2,n)-1;
+      printf("%lld\n",ans);
+  }
+  else
+  {
+      ll val=((power(2,n)-1)-(power(2,n_even)%big)*(power(2,n_odd-1)%big))%big;
+    if(val<0)
+        val+=big;
+     // ll val=(powfun(n)-1)-(powfun(n_even)%big)*((powfun(n_odd-1))%big);
+      printf("%lld\n",val%big);
+  }
+    return 0;
+}
