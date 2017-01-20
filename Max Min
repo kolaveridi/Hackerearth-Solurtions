@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector <int> v;
+int a[200005];
+int main()
+{
+   int n;cin>>n;
+   int k;cin>>k;
+ for(int i=1;i<=n;i++)
+    cin>>a[i];
+    sort(a+1,a+n+1);
+ for(int i=1;i<=n;i++){
+        if(i+k-1<=n){
+    int diff=a[i+k-1]-a[i];
+    //cout<<"diff "<<diff<<endl;
+    v.push_back(diff);
+
+ }
+ }
+ sort(v.begin(),v.end());
+ cout<<v[0]<<endl;
+    return 0;
+}
