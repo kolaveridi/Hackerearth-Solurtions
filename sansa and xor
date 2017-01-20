@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		int xorval=0;
+		for(int i=0;i<n;i++){
+			int x;
+			scanf("%d",&x);
+		if(i%2==0){
+			xorval=xorval^x;
+		}
+		else 
+		continue;	
+		}
+		if(n%2==0){
+			cout<<0<<endl;
+		}
+		else{
+			cout<<xorval<<endl;
+		}
+		
+	}
+} 
