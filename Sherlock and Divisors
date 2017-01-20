@@ -1,0 +1,31 @@
+import java.util.Scanner;
+public class Hr {
+	public static int n;
+	void solve(){
+		int count=0;
+		int i;
+		for( i=1;i*i<n;i++){// n=100  so i to be 9
+			if(n%i==0){
+			
+				if(i%2==0)
+					count++;
+				if((n/i)%2==0)
+					count++;
+			}
+		}
+			if(i*i==n && i%2==0)
+				count++;
+		System.out.println(count);
+	}
+
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int t=in.nextInt();
+		while(t-->0){
+		n=in.nextInt();
+		Hr ob=new Hr();
+		ob.solve();
+	
+}
+}
+}
