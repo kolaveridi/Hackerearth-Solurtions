@@ -1,0 +1,45 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#define SZ(x) ((int)(x).size())
+#define FOR(it, c) for(__typeof((c).begin()) it = (c).begin(); it != (c).end(); ++it)
+using namespace std;
+typedef long long LL;
+
+const LL MOD = 1e9+7;
+const int N = 100005;
+LL f[N], g[N];
+
+LL inv(LL x, LL y, LL p, LL q, LL r, LL s) {
+if(y==0) return (p%MOD+MOD)%MOD;
+return inv(y, x%y, r, s, p-r*(x/y), q-s*(x/y));
+}
+
+LL C(int n, int k) {
+if(n<k) return 0;
+if(k==0 || n==k) return 1;
+return f[n] * g[k] % MOD * g[n-k] % MOD;
+}
+
+int a[N];
+
+int main(void)
+{
+    int n, k;
+    scanf("%d%d", &n, &k);
+
+    f[0] = 1;
+    for(int i=1; i<=n; i++) f[i] = f[i-1] * i % MOD;
+    for(int i=1; i<=n; i++) g[i] = inv(f[i], MOD, 1, 0, 0, 1);
+    for(int i=1; i<=n; i++) scanf("%d", &a[i]);
+    sort(a+1, a+n+1);
+    LL ans = 0;
+    for(int i=k; i<=n; i++) ans += a[i] * C(i-1, k-1) % MOD;
+    for(int i=1; i<=n-k+1; i++) ans -= a[i] * C(n-i, k-1) % MOD;
+    ans = (ans%MOD + MOD) % MOD;
+    printf("%lld\n", ans);
+    return 0;
+}
