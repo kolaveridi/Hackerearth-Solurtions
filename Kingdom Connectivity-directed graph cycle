@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int source;
+int  destination;
+int color[10005];
+int dp[10005];
+int n,m;// n cities or n nodes
+const ll MOD=1000000000;
+const int white=0;
+const int grey=1;
+const int black=2;
+vector <int> v[10005];
+vector <int> vrev[10005];
+bool verticesincycle[100005];// we will mark it true on finding vertex in cycle formation
+ void dfs_1(int u,vector<int> adj[],bool cycle[]){
+color[u]=grey;
+for(int i=0;i<adj[u].size();i++){
+    int x=adj[u][i];//neighbor of vertex u
+    if(color[x]==white)
+        dfs_1(x,adj,cycle);
+    else if(color[x]==grey)// this color found so cycle
+      cycle[x]=true;// this vertex is in cycle
+}
+color[u]=black;// completely explored so we mark it black
+}
+void dfs_2(int u,vector <int> adj[]){
+color[u]=grey;
+for(int i=0;i<adj[u].size();i++){
+      int x=adj[u][i];//neighbor of vertex u
+      if(color[x]==white)
+        dfs_2(x,adj);
+}
+
+color[u]=black;// explored completely
+}
+
+bool cycle_case(){
+// run dfs on graph from source node and mark all those vertices which are in cycle so pass source node,original graph vector)
+memset(color,white,sizeof(color));// all vertex to white color
+dfs_1(source,v,verticesincycle);
+// after running dfs on original graph ,we run dfs on reversed graph and we look all those explored vertices or black ones
+memset(color,white,sizeof(color));
+dfs_2(destination,vrev);
+for(int i=1;i<=n;i++){
+    if(verticesincycle[i]==true && color[i]==black)// if i vertex is explored when dfs done on reverse
+        return true;
+}
+
+return false;
+}
+ll dp_function(int node){
+if(node==destination)
+    return 1;
+ if(verticesincycle[node]==true)// case 3
+    return 0;
+ if(dp[node]!=-1)// it has already been calculated
+    return dp[node];
+ ll ret=0;
+ for(int i=0;i<v[node].size();i++){
+     int  x=v[node][i];//neighbor of vertex node at a unit distance
+     ret=(ret+dp_function(x))%MOD;
+ }
+ return dp[node] = ret;
+
+
+}
+int main(){
+
+
+cin>>n>>m;
+for(int i=1;i<=m;i++){
+    int x,y;
+cin>>x>>y;
+    v[x].push_back(y); //from u to v
+    vrev[y].push_back(x);// from v to u
+}
+memset(dp,-1,sizeof (dp));
+// we check if there is a possibility of infinite paths first by checking if nodes in a cycle are reachable from both sour as well as destination vertex source=1;int destination=n;
+source=1;destination=n;
+if(cycle_case()==true)
+    cout<<"INFINITE PATHS"<<endl;
+    else{
+       // dp(i)= number of path from vertex i to destination node
+       cout<< dp_function(source)<<endl;
+    }
+
+
+}
