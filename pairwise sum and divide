@@ -1,0 +1,33 @@
+//package hrpairwisesumanddivide;
+
+import java.util.Scanner;
+
+public class Hackerrankmaths {
+	public static void input(){
+		
+	}
+static long a[]=new long[210004];
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		int x=in.nextInt();
+		while(x-->0){
+			long n=in.nextInt();
+			long n1=0;
+			long n2=0;
+			for(int i=1;i<=n;i++){
+			   long val=in.nextLong();
+			   a[i]=val;
+			   if(val==1)
+				   n1++;
+			   if(val==2)
+				   n2++;
+			}
+			long ans=n1*(n-1)+n2*(n2-1)/2;
+			System.out.println(ans);
+			
+		}
+		
+
+	}
+
+}
